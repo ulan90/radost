@@ -1,0 +1,29 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block title %}Вход{% endblock title %}
+{% block css %}<link rel="stylesheet", type="text/css" href="{% static 'css/reg_login.css' %}" />{% endblock css %}
+{% block content %}
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+        <!-- Tabs Titles -->
+        <h2 class="active"> Радость </h2>
+        
+        <!-- Icon -->
+        <div class="fadeIn first">
+            <img src="{% static 'images/icon.png' %}" id="icon" alt="User Icon" />
+        </div>
+        
+        <!-- Login Form -->
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" class="fadeIn fourth" value="Войти">
+        </form>
+        
+        <!-- Remind Passowrd -->
+        <div id="formFooter">
+            <a class="underlineHover" href="#">Забыли пароль?</a>
+        </div>
+    </div>
+</div>
+{% endblock content %}

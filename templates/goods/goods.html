@@ -1,0 +1,67 @@
+{% extends 'main/base.html' %}
+{% block title %}Товары{% endblock title %}
+{% block content %}
+<div class="col-sm-9">
+    {% if goods %}
+    <h4 class="text-center alert alert-info">Список товаров</h4>
+    <form method='GET'>
+        <input type='text' name='search_good' value='{{ request.GET.search_good }}' />
+        <input class="button" type='submit' value="Поиск" />
+    </form>
+    <a href="{% url 'goods' %}">Отмена</a>
+    <table class="table table-hover" id="myTable">
+        <thead>
+            <tr>
+                <th scope="col">Код</th>
+                <th scope="col">Наименование</th>
+                <th scope="col">Розн. цена</th>
+                <th scope="col">Автор</th>
+                <th scope="col">Издательство</th>
+                <th scope="col">Действие</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for good in goods %}
+            <tr>
+                <td class="my_good_id">{{ good.id }}</td>
+                <td class="my_good_name">{{ good.name }}</td>
+                <td class="my_good_price">{{ good.price }}</td>
+                <td class="my_good_author">{{ good.Author }}</td>
+                <td class="my_good_publishedHouse">{{ good.published_house }}</td>
+                <td>
+                    <input type="button" data-gid="{{good.id}}" class="btn btn-warning btn-sm btn-edit" value="Редактировать">
+                    <input type="button" data-gid="{{good.id}}" class="btn btn-danger btn-sm btn-del" value="Удалить">
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% if is_paginated %}
+        <div class="pagination">
+            <span class="page-links">
+                {% if page_obj.has_previous %}
+                    {% if request.GET.search_good %}
+                        <a href="?search_good={{ request.GET.search_good}}&page={{ page_obj.previous_page_number }}">&laquo;&nbsp;Previous</a>
+                    {% else %}
+                        <a href="?page={{ page_obj.previous_page_number }}">&laquo;&nbsp;Previous</a>
+                    {% endif %}
+                {% endif %}
+                <span class="page-current">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                </span>
+                {% if page_obj.has_next %}
+                    {% if request.GET.search_good %}
+                        <a href="?search_good={{ request.GET.search_good}}&page={{ page_obj.next_page_number }}">Next&nbsp;&raquo;</a>
+                    {% else %}
+                        <a href="?page={{ page_obj.next_page_number }}">Next&nbsp;&raquo;</a>
+                    {% endif %}
+                {% endif %}
+            </span>
+        </div>
+    {% endif %}
+    {% else %}
+        <p>No goods found!!! :(</p>
+    {% endif %}
+    <a href="{% url 'my_logout' %}">Выход</a>
+</div>
+{% endblock content %}
