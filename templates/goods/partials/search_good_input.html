@@ -1,0 +1,5 @@
+<form hx-get="{% url 'goods' %}" hx-target="#good_list" hx-swap="outerHTML" hx-trigger="submit, input delay:0.8s">
+    {% csrf_token %}
+    <input type='text' name='search_good' value='{{ request.GET.search_good }}' />
+    <input class="button" type='submit' value="Поиск" />
+</form>

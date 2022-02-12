@@ -4,21 +4,18 @@
 {% block content %}
 <div class="col-sm-9">
     <h4 class="text-center alert alert-info">Список товаров</h4>
-    <form
-        hx-get="{% url 'goods' %}"
-        hx-target="#good_list"
-        hx-swap="outerHTML"
-        hx-trigger="submit, input delay:0.8s"
-    >
-        {% csrf_token %}
-        <input type='text' name='search_good' value='{{ request.GET.search_good }}' />
-        <input class="button" type='submit' value="Поиск" />
-    </form>
+    
+    <!-- Поисковая строка -->
+    {% include 'goods/partials/good_search_input.html' %}
+
+    <!-- Список товаров -->
     {% include 'goods/partials/goods_search.html' %}
-    <div id="msg" class="alert alert-danger" style="display: none"></div>
     
+    <!--<div id="msg" class="alert alert-danger" style="display: none"></div>-->
     
+    <!-- Создание товара -->
     {% include 'goods/partials/good_create.html' %}
+    
     <a href="{% url 'my_logout' %}">Выход</a>
 </div>
 {% endblock content %}

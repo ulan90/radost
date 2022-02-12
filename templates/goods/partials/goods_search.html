@@ -16,11 +16,13 @@
                 </thead>
                 <tbody>
                     {% for good in goods %}
+                        <!-- Товар по одному -->
                         {% include 'goods/partials/good_detail.html' %}
                     {% endfor %}
                 </tbody>
             </table>
         </form>
+        <!-- Пагинация -->
         {% include 'goods/partials/goods_pagination.html' %}
     {% else %}
         <p>No goods found!!! :(</p>
