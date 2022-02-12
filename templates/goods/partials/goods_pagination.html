@@ -1,0 +1,21 @@
+<div class="pagination">
+    <span class="page-links">
+        {% if goods.has_previous %}
+            {% if request.GET.search_good %}
+                <a href="" hx-get="{% url 'goods' %}?search_good={{ request.GET.search_good }}&page={{ goods.previous_page_number }}" hx-target="#good_list" hx-swap="outerHTML">&laquo;&nbsp;Previous</a>
+            {% else %}
+                <a href="" hx-get="{% url 'goods' %}?page={{ goods.previous_page_number }}" hx-target="#good_list" hx-swap="outerHTML">&laquo;&nbsp;Previous</a>
+            {% endif %}
+        {% endif %}
+        <span class="page-current">
+            Page {{ goods.number }} of {{ goods.paginator.num_pages }}.
+        </span>
+        {% if goods.has_next %}
+            {% if request.GET.search_good %}
+                <a href="" hx-get="{% url 'goods' %}?search_good={{ request.GET.search_good }}&page={{ goods.next_page_number }}" hx-target="#good_list" hx-swap="outerHTML">Next&nbsp;&raquo;</a>
+            {% else %}
+                <a href="" hx-get="{% url 'goods' %}?page={{ goods.next_page_number }}" hx-target="#good_list" hx-swap="outerHTML">Next&nbsp;&raquo;</a>
+            {% endif %}
+        {% endif %}
+    </span>
+</div>

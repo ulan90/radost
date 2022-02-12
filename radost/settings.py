@@ -135,6 +135,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #Чтобы создать свой юзер в моделях и по желанию добавлять разные поля
 AUTH_USER_MODEL = 'authentication.User'
 
-LOGIN_REDIRECT_URL = 'goods'
+LOGIN_REDIRECT_URL = 'sale'
 LOGIN_URL = 'login'
 LOGOUT_REDIRECT_URL = 'login'

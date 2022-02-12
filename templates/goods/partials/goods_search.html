@@ -1,0 +1,28 @@
+<div id="good_list">
+    {% if goods %}
+        <form>
+            {% csrf_token %}
+            <table class="table table-hover" id="myTable">
+                <thead>
+                    <tr>
+                        <th scope="col">Код</th>
+                        <th scope="col">Наименование</th>
+                        <th scope="col">Розн. цена</th>
+                        <th scope="col">Автор</th>
+                        <th scope="col">Жанр</th>
+                        <th scope="col">Издательство</th>
+                        <th scope="col">Действие</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for good in goods %}
+                        {% include 'goods/partials/good_detail.html' %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        </form>
+        {% include 'goods/partials/goods_pagination.html' %}
+    {% else %}
+        <p>No goods found!!! :(</p>
+    {% endif %}
+</div>

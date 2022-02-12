@@ -1,6 +1,35 @@
 {% extends 'main/base.html' %}
+{% load static %}
 {% block title %}Продажа{% endblock title %}
 {% block content %}
-<h1>Sale</h1>
-<a href="{% url 'my_logout' %}">Logout</a>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-sm-4">
+            <form method="POST">
+                {% csrf_token %}
+                <input type="search" placeholder="Поиск..." name="search_book" id="search_book" class="form-control">
+                <button type="submit" id="check_book_btn" class="btn btn-primary">Поиск</button>
+            </form>
+        </div>
+    </div>
+    <form method="POST" id="products_table">
+        {% csrf_token %}
+        <table id="myTable" class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Код</th>
+                    <th scope="col">Наименование</th>
+                    <th scope="col">Кол-во</th>
+                    <th scope="col">Цена</th>
+                    <th scope="col">Сумма</th>
+                    <th scope="col">Действие</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <input type="submit" class="btn btn-success" value="Продать">
+    </form>
+    <div id="gTotal">0</div>
+    <p><a href="{% url 'my_logout' %}">Выход</a></p>
+</div>
 {% endblock content %}

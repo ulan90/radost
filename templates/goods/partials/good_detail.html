@@ -1,0 +1,17 @@
+<tr hx-target="this" hx-swap="outerHTML">
+    <td class="my_good_id">{{ good.id }}</td>
+    <td class="my_good_name">{{ good.name }}</td>
+    <td class="my_good_price">{{ good.price }}</td>
+    <td class="my_good_author">{{ good.Author }}</td>
+    <td class="my_good_genre">{{ good.Genre }}</td>
+    <td class="my_good_publishedHouse">{{ good.published_house }}</td>
+    <td>
+        <button 
+            hx-post="{% url 'update-good' good.pk %}"
+        >Редактировать</button>
+        <button 
+            hx-delete="{% url 'delete-good' good.pk %}"
+            hx-confirm="Вы уверены что хотите удалить товар?"
+        >Удалить</button>
+    </td>
+</tr>

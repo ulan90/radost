@@ -37,3 +37,24 @@ class Good(models.Model):
 
     def __str__(self):
         return self.name
+
+class Barcode(models.Model):
+    good = models.ForeignKey(Good, on_delete=models.CASCADE, null=False, blank=False)
+    barcode = models.CharField(max_length=50, null=False, primary_key=True)
+
+    def __str__(self):
+        return str(self.good)
+
+class Balance(models.Model):
+    good = models.ForeignKey(Good, on_delete=models.CASCADE, null=False, blank=False)
+    quantity = models.IntegerField(null=True, blank=True)
+
+    def __str__(self):
+        return str(self.good)
+
+class IzlishkiTovara(models.Model):
+    good = models.ForeignKey(Good, on_delete=models.SET_NULL, null=True, blank=True)
+    quantity = models.IntegerField(null=True, blank=True)
+
+    def __str__(self):
+        return str(self.good)

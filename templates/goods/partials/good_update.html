@@ -1,0 +1,16 @@
+<tr hx-target="this" hx-swap="outerHTML">
+    <form>
+        {% csrf_token %}
+        <td class="my_good_id">{{ form.id }}</td>
+        <td class="my_good_name">{{ form.name }}</td>
+        <td class="my_good_price">{{ form.price }}</td>
+        <td class="my_good_author">{{ form.Author }}</td>
+        <td class="my_good_genre">{{ form.Genre }}</td>
+        <td class="my_good_publishedHouse">{{ form.published_house }}</td>
+        <td>
+            <button
+                hx-put="{% url 'update-good' good.pk %}"
+            >Сохранить</button>
+        </td>
+    </form>
+</tr>
