@@ -10,13 +10,13 @@ class GoodForm(forms.ModelForm):
     
     class Meta:
         model = Good
-        fields = '__all__'
+        fields = ['name', 'price', 'Group', 'Author', 'Genre', 'published_house']
         
         labels = {
             "name": "Наименование товара",
             "price": "Цена розничная",
             "Group": "Группа",
             "Author": "Автор",
-            "published_house": "Издательство",
             "Genre": "Жанр",
+            "published_house": "Издательство",
         }
