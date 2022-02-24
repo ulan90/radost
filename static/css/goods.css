@@ -1,0 +1,43 @@
+.barcode_modal_btn {
+    background-color: coral;
+    padding: 1em 2em;
+    color: white;
+    border: 0;
+}
+
+.barcode_modal_btn:hover {
+    background-color: #333;
+    cursor: pointer;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-color: #f4f4f4;
+    margin: 10% auto;
+    padding: 20px;
+    width: 50%;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.17);
+}
+
+#close_btn{
+    color: #ccc;
+    float: right;
+    font-size: 30px;
+}
+
+#close_btn:hover, #close_btn:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}

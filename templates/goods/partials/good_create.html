@@ -1,7 +1,26 @@
-<div id="good_create">
-    <form method="POST" action="{% url 'create-good' %}">
+<div id="good_create" hx-target='this' hx-swap="outerHTML">
+    <h3>Создание/Редактирование товара</h3>
+    <form id="create_good_form" method="POST" action="{% if good %}{% url 'update-good' good.pk %}{% else %}{% url 'create-good' %}{% endif %}">
         {% csrf_token %}
+        <input type="hidden" name="good_id" id="good_id" {% if good %}value="{{ good.pk }}"{% endif %}/>
         {{ form.as_p }}
+        <div class="barcodes">
+            <div>
+                <label>Штрих-код(ы):</label>
+                <button id="add_barcode" type="button">Добавить шк</button>
+            </div>
+            {% if barcodes %}
+                {% for barcode in barcodes %}
+                    <div class="barcode_div">
+                        <p><input data-bar="{{ forloop.counter }}" type="text" name="barcode" class="barcode_class" maxlength="200" required value="{{barcode.barcode}}"><button type="button" class="removeRow">Удалить</button></p>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="barcode_div">
+                    <p><input data-bar="1" type="text" name="barcode" class="barcode_class" maxlength="200" required><button type="button" class="removeRow">Удалить</button></p>
+                </div>
+            {% endif %}
+        </div>
         <button>Сохранить</button>
     </form>
 </div>

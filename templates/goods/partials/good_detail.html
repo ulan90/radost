@@ -7,8 +7,10 @@
     <td class="my_good_genre">{{ good.Genre }}</td>
     <td class="my_good_publishedHouse">{{ good.published_house }}</td>
     <td>
-        <button 
-            hx-post="{% url 'update-good' good.pk %}"
+        <button
+            hx-target="#good_create"
+            hx-swap="outerHTML"
+            hx-post="{% url 'edit-good' good.pk %}"
         >Редактировать</button>
         <button 
             hx-delete="{% url 'delete-good' good.pk %}"

@@ -1,0 +1,6 @@
+{% extends 'main/base.html' %}
+{% block title %}Дублирование штрихкодов{% endblock title %}
+{% block content %}
+<h3>Штрихкод <em>"{{ barcode }}"</em> уже принадлежит товару <em>"{{ id }} {{ name }}"</em>.</h3>
+<a href="{% url 'goods' %}">&laquo;&nbsp;Назад</a>
+{% endblock content %}

@@ -1,4 +1,4 @@
-<tr hx-target="this" hx-swap="outerHTML">
+<!--<tr hx-target="this" hx-swap="outerHTML">
     <form>
         {% csrf_token %}
         <td class="my_good_id">{{ form.id }}</td>
@@ -9,9 +9,24 @@
         <td class="my_good_genre">{{ form.Genre }}</td>
         <td class="my_good_publishedHouse">{{ form.published_house }}</td>
         <td>
+            <button type="button" id="barcode_btn" class="barcode_modal_btn">Штрихкоды</button>
+            <div id="barcodes_modal" class="modal">
+                <div class="modal-content">
+                    <span id="close_btn">&times;</span>
+                    {% if barcodes %}
+                        <h3>Штрихкод(ы) для товара {{ good.name }}:</h3>
+                        {% for barcode in barcodes %}
+                            <p><input name="barcode" type="search" value="{{ barcode.barcode }}" /></p>
+                        {% endfor %}
+                        <p><button type="button" data-gid="{{ good.id }}" id="barcode_save_btn" class="barcode_modal_btn">Сохранить</button></p>
+                    {% else %}
+                        <h3>У этого товара нету штрихкодов!</h3>
+                    {% endif %}
+                </div>
+            </div>
             <button
                 hx-put="{% url 'update-good' good.pk %}"
             >Сохранить</button>
         </td>
     </form>
-</tr>
+</tr>-->

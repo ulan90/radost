@@ -1,6 +1,7 @@
 {% extends 'main/base.html' %}
 {% load static %}
 {% block title %}Товары{% endblock title %}
+{% block css %}<link rel="stylesheet" href="{% static 'css/goods.css' %}" /> {% endblock css %}
 {% block content %}
 <div class="col-sm-9">
     <h4 class="text-center alert alert-info">Список товаров</h4>
@@ -14,12 +15,16 @@
     <!--<div id="msg" class="alert alert-danger" style="display: none"></div>-->
     
     <!-- Создание товара -->
-    {% include 'goods/partials/good_create.html' %}
+    <div id="create_container">
+        {% include 'goods/partials/good_create.html' %}
+        <div id="msg" style="display: none"></div>
+    </div>
     
     <a href="{% url 'my_logout' %}">Выход</a>
 </div>
 {% endblock content %}
 {% block add_script %}
+<script type="text/javascript" src="{% static 'js/goods/my_goods.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/htmx.min.js' %}"></script>
 <script>
     document.body.addEventListener('htmx:configRequest', (event) => {
