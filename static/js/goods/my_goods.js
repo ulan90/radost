@@ -7,6 +7,21 @@ $(document).ready(function(){
         }
     })
 
+    //многофункциональная ajax функция
+    function myAjax(callback, my_url, my_data, my_type='POST', my_dataType='json') {
+        $.ajax({
+            url: my_url,
+            type: my_type,
+            data: my_data,
+            dataType: my_dataType,
+        }).then(function (resp) {
+            callback(resp)
+        }).fail(function () {
+            $("#msg").text("Ошибка отправки")
+            $("#msg").show('slow').delay(2000).hide('slow')
+        })
+    }
+
     //функция добавления input для штрихкода
 	function addBarcode() {
         let count = $('.barcode_class').length
@@ -61,13 +76,9 @@ $(document).ready(function(){
             if(count == 0){
                 const id = $("#good_id").val()
                 const csrf = $("input[name=csrfmiddlewaretoken]").val()
-                mydata = { 'gid': id, 'barcode': barcode, 'csrfmiddlewaretoken': csrf }
-                $.ajax({
-                    url: 'check_barcode/',
-                    type: 'POST',
-                    data: mydata,
-                    dataType: 'json',
-                }).then(function (data) {
+                const mydata = { 'gid': id, 'barcode': barcode, 'csrfmiddlewaretoken': csrf }
+                myAjax(function(data) {
+                    //processing the response data
                     if(data.status === 1){
                         barcode_duplicate = data.good
                         $("#msg").text("Дублирование штрихкодов = " + barcode_duplicate)
@@ -76,10 +87,7 @@ $(document).ready(function(){
                     else{
                         barcode_duplicate = null
                     }
-                }).fail(function () {
-                    $("#msg").text("Ошибка отправки")
-                    $("#msg").show('slow').delay(2000).hide('slow')
-                })
+                }, 'check_barcode/', mydata)
             }
 
         }, 500)
