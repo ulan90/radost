@@ -77,4 +77,9 @@ $(document).ready(function(){
         good_sum.change()
         CalculateTotal()
     })
+
+    $("#myTable").on("click", ".good_delete", function() {
+        $(this).closest("tr").remove()
+        CalculateTotal()
+     });
 })
