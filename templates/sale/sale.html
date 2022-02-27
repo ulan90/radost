@@ -5,10 +5,11 @@
 <div class="container mt-5">
     <div class="row">
         <div class="col-sm-4">
-            <form method="POST">
+            <form id="search_barcode_form" method="POST" action="{% url 'search' %}">
                 {% csrf_token %}
-                <input type="search" placeholder="Поиск..." name="search_book" id="search_book" class="form-control">
-                <button type="submit" id="check_book_btn" class="btn btn-primary">Поиск</button>
+                <input type="search" placeholder="Поиск..." name="search_book" id="search_book" required autocomplete="off">
+                <button type="submit" id="search_book_btn" class="btn btn-primary">Поиск</button>
+                <div id="msg" style="display: none"></div>
             </form>
         </div>
     </div>
@@ -33,3 +34,6 @@
     <p><a href="{% url 'my_logout' %}">Выход</a></p>
 </div>
 {% endblock content %}
+{% block add_script %}
+<script type="text/javascript" src="{% static 'js/sale/sale.js' %}"></script>
+{% endblock add_script %}
