@@ -77,7 +77,4 @@ $(document).ready(function(){
         good_sum.change()
         CalculateTotal()
     })
-    
-        
-        
 })
