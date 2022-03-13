@@ -1,5 +1,12 @@
 $(document).ready(function(){
 
+    //Чтобы кнопка Enter не отправляла форму
+    $('#products_table').on('keypress', 'input', function(event) {
+        if (event.keyCode == 13 ) {
+            event.preventDefault();
+        }
+    })
+
     function CalculateTotal() {
         let grandT = 0
         $("#myTable > TBODY > tr").each(function () {
@@ -14,7 +21,7 @@ $(document).ready(function(){
     function addRow(data){
         let found_sameId = false
         $("#myTable > TBODY > tr").each(function () {
-            const tmp_idVal = $(this).find('.good_id').html()
+            const tmp_idVal = $(this).find('.good_id').val()
             const tmp_qtyVal = $(this).find('.good_quantity')
             if(parseInt(tmp_idVal)===data.id){
                 tmp_qtyVal.val(parseInt(tmp_qtyVal.val()) + 1)
@@ -27,9 +34,12 @@ $(document).ready(function(){
             const my_tbody =  $("#myTable > TBODY")
             const my_tr = $("<tr></tr>")
             for (const [key, value] of Object.entries(data)) {
-                my_tr.append($("<td></td>").attr({class: 'good_'+key}).text(value))
                 if(key === 'name'){
-                    my_tr.append($("<td></td>").append($("<input>").attr({class: 'good_quantity', 'type': 'number', 'step': '1', 'min': '1', 'value': '1' })))
+                    my_tr.append($("<td></td>").attr({class: 'good_'+key}).text(value))
+                    my_tr.append($("<td></td>").append($("<input>").attr({class: 'good_quantity', autocomplete: "off", name:'good_quantity', type: 'number', step: '1', min: '1', value: '1' })))
+                }
+                else{
+                    my_tr.append($("<td></td>").append($("<input>").attr({class: 'good_'+key, name:'good_'+key, value: value}).prop('readonly', true)))
                 }
             }
             my_tr.append($("<td></td>").attr({class: 'good_sum'}).text(data.price))
@@ -69,7 +79,7 @@ $(document).ready(function(){
 
     $('#myTable').on('change', '.good_quantity', function(){
         const row = $(this).parent().closest("tr")
-        const price = parseFloat(row.find('.good_price').html())
+        const price = parseFloat(row.find('.good_price').val())
         const quantity = parseFloat(row.find('.good_quantity').val())
         const good_sum = row.find('.good_sum')
         let a = parseFloat(price*quantity).toFixed(2)

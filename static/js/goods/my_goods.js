@@ -1,6 +1,6 @@
 $(document).ready(function(){
 
-    //Чтобы кнопка Enter не отправляла форму 
+    //Чтобы кнопка Enter не отправляла форму
     $('#create_container').on('keypress', 'input', function(event) {
         if (event.keyCode == 13 ) {
             event.preventDefault();

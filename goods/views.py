@@ -4,7 +4,7 @@ from django.http import QueryDict
 from django.http.response import HttpResponse, JsonResponse
 from django.core.paginator import Paginator
 from .models import Good, Barcode
-from .forms import GoodForm, BarcodeForm
+from .forms import GoodForm
 
 
 @login_required
@@ -25,6 +25,7 @@ def good_list(request):
         goods = p.get_page(page)
         return render(request, "goods/goods.html", {"goods": goods, "form": form})
 
+
 @login_required
 def create_good(request):
     form = GoodForm(request.POST or None)
@@ -42,12 +43,14 @@ def create_good(request):
                 Barcode.objects.create(good_id=new_good.pk, barcode=barcode)
     return redirect("goods")
 
+
 @login_required
 def edit_good(request, pk):
     good = get_object_or_404(Good, pk=pk)
     form = GoodForm(instance=good)
     barcodes = Barcode.objects.filter(good_id=pk)
     return render(request, "goods/partials/good_create.html", {"form": form, "good": good, "barcodes": barcodes })
+
 
 @login_required
 def update_good(request, pk):
@@ -69,6 +72,7 @@ def update_good(request, pk):
                 Barcode.objects.create(good_id=pk, barcode=barcode)
     return redirect("goods")
 
+
 @login_required
 def delete_good(request, pk):
     try:
@@ -77,6 +81,7 @@ def delete_good(request, pk):
     except:
         print("Record doesn't exists")
     return HttpResponse('')
+
 
 @login_required
 def check_barcode(request):

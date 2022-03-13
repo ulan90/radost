@@ -1,5 +1,5 @@
 from django import forms
-from .models import Good, Barcode
+from .models import Good
 
 
 class GoodForm(forms.ModelForm):
@@ -11,18 +11,5 @@ class GoodForm(forms.ModelForm):
     class Meta:
         model = Good
         fields = ['name', 'price', 'Group', 'Author', 'Genre', 'published_house']
-        
-        labels = {
-            "name": "Наименование товара",
-            "price": "Цена розничная",
-            "Group": "Группа",
-            "Author": "Автор",
-            "Genre": "Жанр",
-            "published_house": "Издательство",
-        }
 
-class BarcodeForm(forms.ModelForm):
-    
-    class Meta:
-        model = Barcode
-        fields = '__all__'
+        labels = { "name": "Наименование товара", "price": "Цена розничная", "Group": "Группа", "Author": "Автор", "Genre": "Жанр", "published_house": "Издательство", }

@@ -1,7 +1,6 @@
-from django.shortcuts import render, reverse
-from django.views.generic import TemplateView, CreateView
+from django.shortcuts import reverse
+from django.views.generic import CreateView
 from django.contrib.auth.views import LoginView
-from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import CustomUserCreationForm, CustomLoginViewForm
 
 # Create your views here.
@@ -11,6 +10,7 @@ class SignupView(CreateView):
 
     def get_success_url(self):
         return reverse('login')
+
 
 class CustomLoginView(LoginView):
     form_class = CustomLoginViewForm
