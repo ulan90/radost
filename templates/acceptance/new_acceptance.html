@@ -3,4 +3,31 @@
 {% block title %}Поступление товаров{% endblock title %}
 {% block content %}
 <h1>Поступление товаров</h1>
+<form id="documentForm" action="{% url 'new-acceptance' %}" method="post">
+    {% csrf_token %}
+    <p><label for="doc_id">Номер документа: </label><input id="doc_id" type="text" value="-" readonly /></p>
+    {{ form.as_p }}
+    <input type="search" placeholder="Поиск..." name="search_book" id="search_book" autocomplete="off">
+    <button type="button" id="search_book_btn" data-url="{% url 'search-acceptance-good' %}" class="btn btn-primary">Поиск</button>
+    <table id="myTable" class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Код</th>
+                <th scope="col">Наименование</th>
+                <th scope="col">Кол-во</th>
+                <th scope="col">Цена</th>
+                <th scope="col">Цена Розн.</th>
+                <th scope="col">Сумма</th>
+                <th scope="col">Действие</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    <p><input type="submit" value="Сохранить"/></p>
+</form>
+<div id="gTotal">0</div>
+<p><a href="{% url 'my_logout' %}">Выход</a></p>
 {% endblock content %}
+{% block add_script %}
+<script type="text/javascript" src="{% static 'js/acceptance/acceptance.js' %}"></script>
+{% endblock add_script %}

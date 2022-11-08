@@ -22,9 +22,9 @@ class AcceptanceDocs(models.Model):
 
 class AcceptanceGoods(models.Model):
     good = models.ForeignKey(Good, on_delete=models.SET_NULL, null=True, blank=True)
-    doc_id = models.ForeignKey(AcceptanceDocs, on_delete=models.CASCADE, null=True, blank=True)
+    document = models.ForeignKey(AcceptanceDocs, on_delete=models.CASCADE, null=True, blank=True)
     quantity = models.IntegerField(null=True, blank=True)
-    price = models.DecimalField(max_digits=8, decimal_places=2, null=True, blank=True)
+    purchase_price = models.DecimalField(max_digits=8, decimal_places=2, null=True, blank=True)
 
     def __str__(self):
         return str(self.good)

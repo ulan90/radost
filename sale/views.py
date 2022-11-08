@@ -55,15 +55,16 @@ def sale(request):
 
 @login_required
 def search_good(request):
-    context = {}
-    barcode = Barcode.objects.filter(barcode=request.POST.get('search_book')).first()
-    if barcode:
-        context = {
-            'id': barcode.good_id,
-            'name': str(barcode),
-            'price': barcode.good.price
-        }
-    return JsonResponse(context)
+    if request.method == 'POST':
+        context = {}
+        barcode = Barcode.objects.filter(barcode=request.POST.get('search_book')).first()
+        if barcode:
+            context = {
+                'id': barcode.good_id,
+                'name': str(barcode),
+                'price': barcode.good.price
+            }
+        return JsonResponse(context)
 
 
 def _izlishka_insert_update(myId, myQty):

@@ -36,7 +36,7 @@ $(document).ready(function(){
             for (const [key, value] of Object.entries(data)) {
                 if(key === 'name'){
                     my_tr.append($("<td></td>").attr({class: 'good_'+key}).text(value))
-                    my_tr.append($("<td></td>").append($("<input>").attr({class: 'good_quantity', autocomplete: "off", name:'good_quantity', type: 'number', step: '1', min: '1', value: '1' })))
+                    my_tr.append($("<td></td>").append($("<input>").attr({class: 'good_quantity', autocomplete: "off", name:'good_quantity', type: 'number', step: '1', min: '1', value: '1' }).prop('required', true)))
                 }
                 else{
                     my_tr.append($("<td></td>").append($("<input>").attr({class: 'good_'+key, name:'good_'+key, value: value}).prop('readonly', true)))
@@ -82,7 +82,6 @@ $(document).ready(function(){
         const price = parseFloat(row.find('.good_price').val())
         const quantity = parseFloat(row.find('.good_quantity').val())
         const good_sum = row.find('.good_sum')
-        let a = parseFloat(price*quantity).toFixed(2)
         good_sum.html(parseFloat(price*quantity).toFixed(2))
         good_sum.change()
         CalculateTotal()
